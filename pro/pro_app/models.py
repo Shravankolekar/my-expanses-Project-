@@ -3,7 +3,7 @@ from django.db import models
 # Create your models here.
 
 class user_login(models.Model):
-    emial=models.EmailField(max_length=1000)
+    emial=models.EmailField(max_length=1000 , primary_key=True)
     password=models.CharField(max_length=100)
 
     def __str__(self):
@@ -17,6 +17,7 @@ class expancess(models.Model):
     expense_date = models.DateField( auto_now=True)
     payment_method = models.CharField(max_length=100)
     
-
+    def __str__(self):
+        return self.category
     
     

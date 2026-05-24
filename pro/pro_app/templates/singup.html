@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sing Up Page</title>
+</head>
+<body>
+    <h1>User Sing Up Page</h1>
+    <form action="" method="POST">
+        {% csrf_token %}
+
+        <label for="">Email :- </label>
+
+        <input type="email"
+            name="email"
+            placeholder="Enter a Email ID"
+            required
+            >
+
+        <label for="">Password :- </label>
+
+        <input type="text"
+            name="password"
+            placeholder="Enter a Password"
+            required
+            >
+
+            {% if error %}
+            <p><b>{{error}}</b></p>
+            {% endif %}
+
+    </form>
+    
+</body>
+</html>
