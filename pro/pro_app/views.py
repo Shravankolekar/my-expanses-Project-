@@ -15,6 +15,6 @@ def singup_page(request):
             )
             error = "login"
 
-    return render(request , "singup.html" , {"error": error})
+    return render(request , "singup.html" , {"error": error} )
 
 
