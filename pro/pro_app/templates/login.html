@@ -37,8 +37,8 @@
             width: 100%;
             max-width: 400px;
 
-            background: rgba(255,255,255,0.92);
-            backdrop-filter: blur(8px);
+            background: rgba(255,255,255,0.08);
+            backdrop-filter: blur(10px);
 
             padding: 30px 25px;
 
@@ -50,7 +50,7 @@
         .login-container h1{
             text-align: center;
             margin-bottom: 25px;
-            color: #222;
+            color: #ffffff;
             font-size: 28px;
         }
 
@@ -59,20 +59,36 @@
             flex-direction: column;
         }
 
+        label{
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #ffffff;
+            font-size: 15px;
+        }
+
         input{
+
             width: 100%;
             padding: 14px;
 
             margin-bottom: 18px;
 
-            border: 1px solid #ccc;
+            border: 1px solid rgba(255,255,255,0.4);
             border-radius: 12px;
 
             outline: none;
 
+            background: transparent;
+
+            color: white;
+
             font-size: 15px;
 
             transition: 0.3s;
+        }
+
+        input::placeholder{
+            color: #eeeeee;
         }
 
         input:focus{
@@ -81,7 +97,7 @@
         }
 
         .error{
-            color: red;
+            color: #ff4d4d;
             text-align: center;
             margin-top: 15px;
             font-size: 14px;
@@ -152,12 +168,16 @@
 
             <h1>Login Page</h1>
 
+            <label>Email :- </label>
+
             <input 
                 type="email"
                 name="email"
                 placeholder="Enter Email ID"
                 required
             >
+
+            <label>Password :- </label>
 
             <input 
                 type="password"
