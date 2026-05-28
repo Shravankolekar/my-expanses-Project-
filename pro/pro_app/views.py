@@ -17,4 +17,19 @@ def singup_page(request):
 
     return render(request , "singup.html" , {"error": error} )
 
-
+def login_page(request):
+    
+    error = ""
+    
+    if request.method == "POST" :
+        
+        email = request.POST.get("emial")
+        password = request.POST.get("password")
+        
+        try:
+            login_user = user_login.objects.get(email = email , password = password)
+            error = "login"
+        except:
+            error = "not login"  
+    
+    return render(request , "login.html" )

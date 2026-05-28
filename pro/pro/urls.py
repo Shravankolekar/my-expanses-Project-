@@ -21,5 +21,6 @@ from pro_app import views
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("" , views.singup_page , name="singup")
+    path("" , views.singup_page , name="singup"),
+    path("login/" , views.login_page , name="login"),
 ]
