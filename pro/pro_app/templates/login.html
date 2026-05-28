@@ -4,33 +4,181 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login Page</title>
+
+    <style>
+
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body{
+            width: 100%;
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            /* Background Image */
+            background-image: url('https://images.unsplash.com/photo-1518770660439-4636190af475');
+
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+
+            padding: 15px;
+        }
+
+        .login-container{
+
+            width: 100%;
+            max-width: 400px;
+
+            background: rgba(255,255,255,0.92);
+            backdrop-filter: blur(8px);
+
+            padding: 30px 25px;
+
+            border-radius: 20px;
+
+            box-shadow: 0px 5px 20px rgba(0,0,0,0.3);
+        }
+
+        .login-container h1{
+            text-align: center;
+            margin-bottom: 25px;
+            color: #222;
+            font-size: 28px;
+        }
+
+        form{
+            display: flex;
+            flex-direction: column;
+        }
+
+        input{
+            width: 100%;
+            padding: 14px;
+
+            margin-bottom: 18px;
+
+            border: 1px solid #ccc;
+            border-radius: 12px;
+
+            outline: none;
+
+            font-size: 15px;
+
+            transition: 0.3s;
+        }
+
+        input:focus{
+            border-color: #4facfe;
+            box-shadow: 0px 0px 8px rgba(79,172,254,0.5);
+        }
+
+        .error{
+            color: red;
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        button{
+
+            width: 100%;
+
+            padding: 14px;
+
+            border: none;
+            border-radius: 12px;
+
+            background: linear-gradient(135deg,#4facfe,#00f2fe);
+
+            color: white;
+
+            font-size: 16px;
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+        button:hover{
+            transform: scale(1.02);
+            opacity: 0.9;
+        }
+
+        /* Mobile Responsive */
+
+        @media(max-width:480px){
+
+            .login-container{
+                padding: 25px 18px;
+                border-radius: 15px;
+            }
+
+            .login-container h1{
+                font-size: 24px;
+            }
+
+            input{
+                padding: 12px;
+                font-size: 14px;
+            }
+
+            button{
+                padding: 12px;
+                font-size: 15px;
+            }
+
+        }
+
+    </style>
+
 </head>
+
 <body>
-    <form action="" method="POST">
-        
-        {% csrf_token %}
 
-        <h1>Login Page</h1>
+    <div class="login-container">
 
-        <input type="email"
-        name="email"
-        placeholder="enter a email ID"
-        required
-        >
+        <form action="" method="POST">
 
-        <input type="text"
-        name="password"
-        placeholder="enter a passoword"
-        required
-        >
+            {% csrf_token %}
 
-        <button type="submit">Login</button>
+            <h1>Login Page</h1>
 
-    </form>
+            <input 
+                type="email"
+                name="email"
+                placeholder="Enter Email ID"
+                required
+            >
 
-    {% if error %}
-    <p><b>{{error}}</b></p>
-    {% endif %}
-    
+            <input 
+                type="password"
+                name="password"
+                placeholder="Enter Password"
+                required
+            >
+
+            <button type="submit">
+                Login
+            </button>
+
+        </form>
+
+        {% if error %}
+            <p class="error">
+                <b>{{error}}</b>
+            </p>
+        {% endif %}
+
+    </div>
+
 </body>
 </html>

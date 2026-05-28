@@ -23,13 +23,14 @@ def login_page(request):
     
     if request.method == "POST" :
         
-        email = request.POST.get("emial")
+        email = request.POST.get("email")
         password = request.POST.get("password")
         
-        try:
-            login_user = user_login.objects.get(email = email , password = password)
+        
+        login_user = user_login.objects.filter(email = email , password = password).first()
+        if login_user:
             error = "login"
-        except:
+        else:
             error = "not login"  
     
-    return render(request , "login.html" )
+    return render(request , "login.html" , {"error" : error} )
