@@ -23,4 +23,5 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     path("" , views.singup_page , name="singup"),
     path("login/" , views.login_page , name="login"),
+    path("login/add/" , views.addexpancess , name="addexpancess"),
 ]

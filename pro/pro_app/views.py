@@ -34,3 +34,6 @@ def login_page(request):
             error = "not login"  
     
     return render(request , "login.html" , {"error" : error} )
+
+def addexpancess(request):
+    return render(request , "addexpancess.html")
