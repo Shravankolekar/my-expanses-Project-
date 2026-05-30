@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add expances</title>
+</head>
+<body>
+
+    <h1>Add Expancess</h1>
+    
+    <form action="" method="POST">
+        {% csrf_token %}
+
+        <label for="">Category Name </label>
+        <select name="category">Select Category
+            <option value="Food">Food</option>
+            <option value="Travel">Travel</option>
+            <option value="Fraind">Fraind</option>
+            <option value="Shoping">Shoping</option>
+            <option value="Home">Home</option>
+        </select>
+
+        <label for="">Amount</label>
+        <input type="number"
+        name="amount"
+        placeholder="Enter a Amount "
+        required
+        >
+
+        <label for="">Note</label>
+        <input type="text"
+        name="note"
+        placeholder="Enter a Addition Information Hear......!"
+        required
+        >
+
+        <label for="">Payment Method</label>
+        <select name="payment_method" required>
+            <option value="">-- Select Payment Method --</option>
+            <option value="Creadit Card">Creadit Card</option>
+            <option value="Cash">Cash</option>
+            <option value="Googal Pay">Google Pay</option>
+            <option value="Phonepy">Phonepy</option>
+            <option value="Paytm">Paytm</option>
+        </select>
+
+        <button type="submit">Submit</button>
+
+
+    </form>
+
+    {% if error %}
+    <p><b>{{error}}</b></p>
+    {% endif %}
+
+</body>
+</html>
