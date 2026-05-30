@@ -1,58 +1,172 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add expances</title>
+    <title>Add Expenses</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, sans-serif;
+        }
+
+        body{
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+
+            background:url("https://images.unsplash.com/photo-1554224155-6726b3ff858f")
+            no-repeat center center/cover;
+        }
+
+        .form-container{
+            width:90%;
+            max-width:500px;
+            padding:30px;
+
+            background:rgba(255,255,255,0.15);
+            backdrop-filter:blur(15px);
+            -webkit-backdrop-filter:blur(15px);
+
+            border-radius:20px;
+            border:1px solid rgba(255,255,255,0.2);
+
+            box-shadow:0 8px 32px rgba(0,0,0,0.3);
+        }
+
+        h1{
+            text-align:center;
+            color:white;
+            margin-bottom:25px;
+        }
+
+        label{
+            display:block;
+            color:white;
+            font-weight:bold;
+            margin-top:15px;
+            margin-bottom:5px;
+        }
+
+        input,
+        select{
+            width:100%;
+            padding:12px;
+            border:none;
+            border-radius:10px;
+            outline:none;
+            font-size:16px;
+        }
+
+        button{
+            width:100%;
+            padding:12px;
+            margin-top:20px;
+
+            border:none;
+            border-radius:10px;
+
+            background:#28a745;
+            color:white;
+            font-size:18px;
+            font-weight:bold;
+
+            cursor:pointer;
+            transition:0.3s;
+        }
+
+        button:hover{
+            background:#218838;
+        }
+
+        .message{
+            text-align:center;
+            margin-top:15px;
+            color:white;
+            font-weight:bold;
+        }
+
+        @media(max-width:600px){
+
+            .form-container{
+                width:95%;
+                padding:20px;
+            }
+
+            h1{
+                font-size:24px;
+            }
+
+            input,
+            select,
+            button{
+                font-size:15px;
+            }
+        }
+    </style>
+
 </head>
 <body>
 
-    <h1>Add Expancess</h1>
-    
-    <form action="" method="POST">
-        {% csrf_token %}
+    <div class="form-container">
 
-        <label for="">Category Name </label>
-        <select name="category">Select Category
-            <option value="Food">Food</option>
-            <option value="Travel">Travel</option>
-            <option value="Fraind">Fraind</option>
-            <option value="Shoping">Shoping</option>
-            <option value="Home">Home</option>
-        </select>
+        <h1>Add Expenses</h1>
 
-        <label for="">Amount</label>
-        <input type="number"
-        name="amount"
-        placeholder="Enter a Amount "
-        required
-        >
+        <form action="" method="POST">
+            {% csrf_token %}
 
-        <label for="">Note</label>
-        <input type="text"
-        name="note"
-        placeholder="Enter a Addition Information Hear......!"
-        required
-        >
+            <label>Category Name</label>
+            <select name="category" required>
+                <option value="">Select Category</option>
+                <option value="Food">Food</option>
+                <option value="Travel">Travel</option>
+                <option value="Friend">Friend</option>
+                <option value="Shopping">Shopping</option>
+                <option value="Home">Home</option>
+            </select>
 
-        <label for="">Payment Method</label>
-        <select name="payment_method" required>
-            <option value="">-- Select Payment Method --</option>
-            <option value="Creadit Card">Creadit Card</option>
-            <option value="Cash">Cash</option>
-            <option value="Googal Pay">Google Pay</option>
-            <option value="Phonepy">Phonepy</option>
-            <option value="Paytm">Paytm</option>
-        </select>
+            <label>Amount</label>
+            <input
+                type="number"
+                name="amount"
+                placeholder="Enter Amount"
+                required
+            >
 
-        <button type="submit">Submit</button>
+            <label>Note</label>
+            <input
+                type="text"
+                name="note"
+                placeholder="Enter Additional Information"
+                required
+            >
 
+            <label>Payment Method</label>
+            <select name="payment_method" required>
+                <option value="">Select Payment Method</option>
+                <option value="Credit Card">Credit Card</option>
+                <option value="Cash">Cash</option>
+                <option value="Google Pay">Google Pay</option>
+                <option value="PhonePe">PhonePe</option>
+                <option value="Paytm">Paytm</option>
+            </select>
 
-    </form>
+            <button type="submit">Add Expense</button>
+        </form>
 
-    {% if error %}
-    <p><b>{{error}}</b></p>
-    {% endif %}
+        {% if error %}
+            <div class="message">
+                {{ error }}
+            </div>
+        {% endif %}
+
+    </div>
 
 </body>
 </html>
+```
