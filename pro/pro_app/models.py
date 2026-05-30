@@ -14,7 +14,7 @@ class expancess(models.Model):
     category = models.CharField(max_length=100)
     amount = models.BigIntegerField()
     note  = models.CharField(max_length=10000)
-    expense_date = models.DateField( auto_now=True)
+    expense_date = models.DateField( auto_now_add=True)
     payment_method = models.CharField(max_length=100)
     
     def __str__(self):

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render , redirect
 from .models import user_login , expancess
 
 # Create your views here.
@@ -29,11 +29,28 @@ def login_page(request):
         
         login_user = user_login.objects.filter(email = email , password = password).first()
         if login_user:
-            error = "login"
+            return redirect("addexpancess")
         else:
-            error = "not login"  
+            error = "Enter a Currect Username and Password"  
     
     return render(request , "login.html" , {"error" : error} )
 
+
 def addexpancess(request):
-    return render(request , "addexpancess.html")
+    
+    error = ""
+    
+    if request.method == "POST":
+        
+        try:
+            expancess.objects.create(
+                category = request.POST.get("category"),
+                amount = request.POST.get("amount"),
+                note = request.POST.get("note"),
+                payment_method = request.POST.get("payment_method")
+            )
+            error = "done"
+        except :
+            error = "Enter a Currect Information"
+    
+    return render(request , "addexpances.html" , {"error" : error} )
