@@ -119,7 +119,15 @@
 
         .error{
             text-align: center;
-            color: #ffcccb;
+            color: #ff0400;
+            margin-top: 15px;
+            font-size: 15px;
+        }
+
+
+        .msg{
+            text-align: center;
+            color: #00ff40;
             margin-top: 15px;
             font-size: 15px;
         }
@@ -177,6 +185,12 @@
             {% if error %}
                 <p class="error">
                     <b>{{ error }}</b>
+                </p>
+            {% endif %}
+
+            {% if mag %}
+                <p class="msg">
+                    <b>{{ mag }}</b>
                 </p>
             {% endif %}
 

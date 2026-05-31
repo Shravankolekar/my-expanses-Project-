@@ -77,3 +77,19 @@ def showingalldata(request):
             "total_expense": total_expense
         }
     )
+    
+def deletedata(request):
+    
+    error = "" 
+    mag = ""
+    
+    if request.method == "POST":
+        id = request.POST.get("id")
+        
+        try:
+            d = expancess.objects.get(id = id)
+            d.delete()
+            mag = "Delete Sucessfully"
+        except:
+            error = "Enter a Currect Serial Number"
+    return render(request , "deletedata.html" , {"error" : error ,"mag" : mag})
