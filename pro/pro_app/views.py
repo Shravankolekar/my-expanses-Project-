@@ -57,6 +57,23 @@ def addexpancess(request):
     
     return render(request , "addexpances.html" , {"error" : error} )
 
+from django.shortcuts import render
+from django.db.models import Sum
+from .models import expancess
+
 def showingalldata(request):
+
     data = expancess.objects.all()
-    return render(request , "showalldata.html" , {"data" : data})
+
+    total_expense = expancess.objects.aggregate(
+        total=Sum('amount')
+    )['total']
+
+    return render(
+        request,
+        "showalldata.html",
+        {
+            "data": data,
+            "total_expense": total_expense
+        }
+    )

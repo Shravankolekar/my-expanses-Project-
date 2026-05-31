@@ -3,35 +3,229 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Show All Data</title>
+    <title>Expense Records</title>
+
+    <style>
+
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body{
+            min-height: 100vh;
+            background: linear-gradient(135deg,#667eea,#764ba2);
+            padding: 20px;
+        }
+
+        h1{
+            text-align: center;
+            color: white;
+            margin-bottom: 20px;
+            font-size: 32px;
+        }
+
+        /* Total Expense Card */
+
+        .total-card{
+            max-width: 350px;
+            margin: 0 auto 25px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0px 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .total-card h3{
+            color: #555;
+            margin-bottom: 10px;
+        }
+
+        .total-card h2{
+            color: green;
+            font-size: 32px;
+        }
+
+        .table-container{
+            width: 100%;
+        }
+
+        table{
+            width: 100%;
+            border-collapse: collapse;
+            background: rgba(255,255,255,0.95);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0px 8px 25px rgba(0,0,0,0.2);
+        }
+
+        thead{
+            background: #4f46e5;
+            color: white;
+        }
+
+        th{
+            padding: 18px;
+            text-align: center;
+            font-size: 16px;
+        }
+
+        td{
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #eee;
+            font-size: 15px;
+        }
+
+        tbody tr:hover{
+            background: #f5f7ff;
+            transition: 0.3s;
+        }
+
+        td:last-child{
+            color: green;
+            font-weight: bold;
+        }
+
+        /* Mobile Responsive */
+
+        @media(max-width:768px){
+
+            body{
+                padding: 12px;
+            }
+
+            h1{
+                font-size: 24px;
+            }
+
+            .total-card{
+                max-width: 100%;
+            }
+
+            table,
+            thead,
+            tbody,
+            th,
+            td,
+            tr{
+                display: block;
+            }
+
+            thead{
+                display: none;
+            }
+
+            tr{
+                background: white;
+                margin-bottom: 15px;
+                border-radius: 12px;
+                padding: 15px;
+                box-shadow: 0px 3px 10px rgba(0,0,0,0.15);
+            }
+
+            td{
+                text-align: right;
+                position: relative;
+                border: none;
+                padding: 10px;
+                padding-left: 45%;
+                word-break: break-word;
+            }
+
+            td::before{
+                position: absolute;
+                left: 10px;
+                font-weight: bold;
+                color: #4f46e5;
+            }
+
+            td:nth-child(1)::before{
+                content: "ID";
+            }
+
+            td:nth-child(2)::before{
+                content: "Category";
+            }
+
+            td:nth-child(3)::before{
+                content: "Note";
+            }
+
+            td:nth-child(4)::before{
+                content: "Expense Date";
+            }
+
+            td:nth-child(5)::before{
+                content: "Payment Method";
+            }
+
+            td:nth-child(6)::before{
+                content: "Amount";
+            }
+
+        }
+
+    </style>
+
 </head>
 <body>
-    <table>
-        <thead>
-        <tr>
-            <th>Sr No</th>
-            <th>Category Name</th>
-            <th>Note</th>
-            <th>Expance Date</th>
-            <th>Payment Method</th>
-            <th>Amount</th>
-        </tr>
-        </thead>
-        <tbody>
-            {% for d in data %}
-            
+
+    <h1>Expense Records</h1>
+
+    <!-- Total Expense Card -->
+
+    <div class="total-card">
+        <h3>Total Expense</h3>
+        <h2>₹ {{ total_expense }}</h2>
+    </div>
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
                 <tr>
-                    <td>{{d.id}}</td>
-                    <td>{{d.category}}</td>
-                    <td>{{d.note}}</td>
-                    <td>{{d.expense_date}}</td>
-                    <td>{{d.payment_method}}</td>
-                    <td>{{d.amount}}</td>
+                    <th>Sr No</th>
+                    <th>Category Name</th>
+                    <th>Note</th>
+                    <th>Expense Date</th>
+                    <th>Payment Method</th>
+                    <th>Amount</th>
                 </tr>
-            
-            {% endfor %}
-        </tbody>
-    </table>
-    
+            </thead>
+
+            <tbody>
+
+                {% for d in data %}
+
+                <tr>
+                    <td>{{ d.id }}</td>
+                    <td>{{ d.category }}</td>
+                    <td>{{ d.note }}</td>
+                    <td>{{ d.expense_date }}</td>
+                    <td>{{ d.payment_method }}</td>
+                    <td>₹ {{ d.amount }}</td>
+                </tr>
+
+                {% empty %}
+
+                <tr>
+                    <td colspan="6" style="text-align:center; color:red;">
+                        No Expense Records Found
+                    </td>
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+
+        </table>
+
+    </div>
+
 </body>
 </html>
