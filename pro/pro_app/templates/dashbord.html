@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Expense Dashboard</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, sans-serif;
+}
+
+body{
+    background:#f5f7fa;
+}
+
+.navbar{
+    width:100%;
+    background:#1e293b;
+    color:white;
+    padding:15px 30px;
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+}
+
+.logo{
+    font-size:24px;
+    font-weight:bold;
+}
+
+.logout-btn{
+    background:#ef4444;
+    color:white;
+    text-decoration:none;
+    padding:10px 20px;
+    border-radius:8px;
+    transition:.3s;
+}
+
+.logout-btn:hover{
+    background:#dc2626;
+}
+
+.container{
+    padding:30px;
+}
+
+.heading{
+    text-align:center;
+    margin-bottom:30px;
+}
+
+.cards{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:20px;
+}
+
+.card{
+    background:white;
+    padding:25px;
+    border-radius:15px;
+    box-shadow:0 4px 10px rgba(0,0,0,.1);
+    text-align:center;
+    transition:.3s;
+}
+
+.card:hover{
+    transform:translateY(-5px);
+}
+
+.card h2{
+    color:#334155;
+    margin-bottom:15px;
+}
+
+.card a{
+    text-decoration:none;
+    color:white;
+    background:#2563eb;
+    padding:12px 20px;
+    border-radius:8px;
+    display:inline-block;
+}
+
+.card a:hover{
+    background:#1d4ed8;
+}
+
+.footer{
+    margin-top:50px;
+    text-align:center;
+    color:gray;
+}
+
+@media(max-width:768px){
+
+    .navbar{
+        flex-direction:column;
+        gap:15px;
+    }
+
+    .logo{
+        font-size:20px;
+    }
+
+    .container{
+        padding:15px;
+    }
+}
+
+</style>
+</head>
+<body>
+
+<div class="navbar">
+
+    <div class="logo">
+        Expense Tracker Dashboard
+    </div>
+
+    <a href="{% url 'logout' %}" class="logout-btn">
+        Logout
+    </a>
+
+</div>
+
+<div class="container">
+
+    <h1 class="heading">
+        Welcome To Dashboard
+    </h1>
+
+    <div class="cards">
+
+        <div class="card">
+            <h2>Add Expense</h2>
+
+            <a href="{% url 'addexpancess' %}">
+                Open
+            </a>
+        </div>
+
+        <div class="card">
+            <h2>View Expenses</h2>
+
+            <a href="{% url 'showalldata' %}">
+                Open
+            </a>
+        </div>
+
+        <div class="card">
+            <h2>Delete Expense</h2>
+
+            <a href="{% url 'deletedata' %}">
+                Open
+            </a>
+        </div>
+
+    </div>
+
+    <div class="footer">
+        © 2026 Expense Management System
+    </div>
+
+</div>
+
+</body>
+</html>
