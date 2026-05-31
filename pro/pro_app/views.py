@@ -15,7 +15,7 @@ def singup_page(request):
                 email = request.POST.get("email"),
                 password  = request.POST.get("password")
             )
-            error = "login"
+            return redirect("dashbord")
 
     return render(request , "singup.html" , {"error": error} )
 
@@ -31,7 +31,7 @@ def login_page(request):
         
         login_user = user_login.objects.filter(email = email , password = password).first()
         if login_user:
-            return redirect("addexpancess")
+            return redirect("dashbord")
         else:
             error = "Enter a Currect Username and Password"  
     
@@ -93,3 +93,6 @@ def deletedata(request):
         except:
             error = "Enter a Currect Serial Number"
     return render(request , "deletedata.html" , {"error" : error ,"mag" : mag})
+
+def dashbord(request):
+    return render(request , "dashbord.html")

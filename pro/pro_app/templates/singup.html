@@ -1,198 +1,327 @@
 <!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sign Up Page</title>
+    <title>Expense Tracker Signup</title>
 
-    <style>
+```
+<style>
 
-        *{
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, Helvetica, sans-serif;
-        }
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+        font-family:Arial, Helvetica, sans-serif;
+    }
+
+    body{
+        width:100%;
+        min-height:100vh;
+
+        display:flex;
+        justify-content:center;
+        align-items:center;
+
+        background-image:url('https://images.unsplash.com/photo-1518770660439-4636190af475');
+        background-size:cover;
+        background-position:center;
+        background-repeat:no-repeat;
+
+        padding:20px;
+        padding-top:100px;
+    }
+
+    /* ======================
+       NAVBAR
+    ====================== */
+
+    .navbar{
+        position:fixed;
+        top:0;
+        left:0;
+
+        width:100%;
+
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+
+        padding:15px 40px;
+
+        background:rgba(0,0,0,0.6);
+        backdrop-filter:blur(10px);
+
+        z-index:1000;
+    }
+
+    .logo{
+        color:white;
+        font-size:24px;
+        font-weight:bold;
+    }
+
+    .nav-links{
+        display:flex;
+        gap:10px;
+    }
+
+    .nav-btn{
+        text-decoration:none;
+        color:white;
+
+        padding:10px 20px;
+
+        border-radius:10px;
+
+        background:linear-gradient(135deg,#4facfe,#00f2fe);
+
+        transition:0.3s;
+    }
+
+    .nav-btn:hover{
+        transform:translateY(-2px);
+    }
+
+    /* ======================
+       SIGNUP CARD
+    ====================== */
+
+    .signup-container{
+
+        width:100%;
+        max-width:420px;
+
+        background:rgba(255,255,255,0.08);
+        backdrop-filter:blur(12px);
+
+        padding:30px;
+
+        border-radius:20px;
+
+        box-shadow:0px 5px 20px rgba(0,0,0,0.3);
+    }
+
+    .signup-container h1{
+        text-align:center;
+        color:white;
+        margin-bottom:25px;
+        font-size:30px;
+    }
+
+    form{
+        display:flex;
+        flex-direction:column;
+    }
+
+    label{
+        color:white;
+        font-weight:bold;
+        margin-bottom:8px;
+    }
+
+    input{
+        width:100%;
+
+        padding:14px;
+
+        margin-bottom:18px;
+
+        border:1px solid rgba(255,255,255,0.4);
+        border-radius:12px;
+
+        background:transparent;
+        color:white;
+
+        outline:none;
+
+        font-size:15px;
+    }
+
+    input::placeholder{
+        color:#ddd;
+    }
+
+    input:focus{
+        border-color:#4facfe;
+        box-shadow:0 0 8px rgba(79,172,254,0.5);
+    }
+
+    button{
+        width:100%;
+
+        padding:14px;
+
+        border:none;
+        border-radius:12px;
+
+        background:linear-gradient(135deg,#4facfe,#00f2fe);
+
+        color:white;
+
+        font-size:16px;
+        font-weight:bold;
+
+        cursor:pointer;
+
+        transition:0.3s;
+    }
+
+    button:hover{
+        transform:scale(1.02);
+    }
+
+    .error{
+        text-align:center;
+        color:#ff4d4d;
+        margin-bottom:15px;
+        font-size:14px;
+    }
+
+    /* ======================
+       TABLET
+    ====================== */
+
+    @media(max-width:768px){
 
         body{
-            width: 100%;
-            min-height: 100vh;
+            padding-top:160px;
+        }
 
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        .navbar{
+            flex-direction:column;
+            gap:15px;
+            padding:15px;
+        }
 
-            /* Background Image */
-            background-image: url('https://images.unsplash.com/photo-1518770660439-4636190af475');
+        .logo{
+            font-size:20px;
+            text-align:center;
+        }
 
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
+        .nav-links{
+            width:100%;
+            justify-content:center;
+        }
 
-            padding: 15px;
+        .nav-btn{
+            flex:1;
+            text-align:center;
+        }
+    }
+
+    /* ======================
+       MOBILE
+    ====================== */
+
+    @media(max-width:480px){
+
+        body{
+            padding-top:180px;
         }
 
         .signup-container{
-
-            width: 100%;
-            max-width: 400px;
-
-            background: transparent;
-            backdrop-filter: blur(8px);
-
-            padding: 30px 25px;
-
-            border-radius: 20px;
-
-
-            box-shadow: 0px 5px 20px rgba(0,0,0,0.3);
+            padding:25px 18px;
         }
 
         .signup-container h1{
-            text-align: center;
-            margin-bottom: 25px;
-            color: #ffffff;
-            font-size: 28px;
+            font-size:24px;
         }
 
-        form{
-            display: flex;
-            flex-direction: column;
+        .logo{
+            font-size:18px;
         }
 
-        label{
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: #ffffff;
-            font-size: 15px;
+        .nav-links{
+            flex-direction:column;
+            width:100%;
+        }
+
+        .nav-btn{
+            width:100%;
+            text-align:center;
         }
 
         input{
-            width: 100%;
-            padding: 14px;
-
-            margin-bottom: 18px;
-
-            border: 1px solid #fff4f4;
-            border-radius: 12px;
-
-            outline: none;
-
-            font-size: 15px;
-
-            transition: 0.3s;
-
-            background: transparent;
-        }
-
-        input:focus{
-            border-color:   #0088ff;
-            box-shadow: 0px 0px 8px rgba(0, 136, 255, 0.5);
-        }
-
-        .error{
-            color: red;
-            text-align: center;
-            margin-bottom: 15px;
-            font-size: 14px;
+            padding:12px;
+            font-size:14px;
         }
 
         button{
-
-            width: 100%;
-
-            padding: 14px;
-
-            border: none;
-            border-radius: 12px;
-
-            background: linear-gradient(135deg,#4facfe,#00f2fe);
-
-            color: white;
-
-            font-size: 16px;
-            font-weight: bold;
-
-            cursor: pointer;
-
-            transition: 0.3s;
+            padding:12px;
+            font-size:14px;
         }
+    }
 
-        button:hover{
-            transform: scale(1.02);
-            opacity: 0.9;
-        }
-
-        /* Mobile Responsive */
-
-        @media(max-width:480px){
-
-            .signup-container{
-                padding: 25px 18px;
-                border-radius: 15px;
-            }
-
-            .signup-container h1{
-                font-size: 24px;
-            }
-
-            input{
-                padding: 12px;
-                font-size: 14px;
-            }
-
-            button{
-                padding: 12px;
-                font-size: 15px;
-            }
-
-        }
-
-    </style>
+</style>
+```
 
 </head>
 
 <body>
 
-    <div class="signup-container">
+```
+<!-- Navbar -->
 
-        <h1>User Sign Up</h1>
+<div class="navbar">
 
-        <form action="" method="POST">
+    <div class="logo">
+        Expense Tracker Sign Up
+    </div>
 
-            {% csrf_token %}
+    <div class="nav-links">
 
-            <label>Email :- </label>
-
-            <input 
-                type="email"
-                name="email"
-                placeholder="Enter Email ID"
-                required
-            >
-
-            <label>Password :- </label>
-
-            <input 
-                type="password"
-                name="password"
-                placeholder="Enter Password"
-                required
-            >
-
-            {% if error %}
-                <p class="error">
-                    <b>{{error}}</b>
-                </p>
-            {% endif %}
-
-            <button type="submit">
-                Signup
-            </button>
-
-        </form>
+        <a href="{% url 'login' %}" class="nav-btn">
+            Login
+        </a>
 
     </div>
+
+</div>
+
+<!-- Signup Form -->
+
+<div class="signup-container">
+
+    <h1>User Sign Up</h1>
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <label>Email</label>
+
+        <input
+            type="email"
+            name="email"
+            placeholder="Enter Email Address"
+            required
+        >
+
+        <label>Password</label>
+
+        <input
+            type="password"
+            name="password"
+            placeholder="Enter Password"
+            required
+        >
+
+        {% if error %}
+            <p class="error">
+                <b>{{ error }}</b>
+            </p>
+        {% endif %}
+
+        <button type="submit">
+            Sign Up
+        </button>
+
+    </form>
+
+</div>
+```
 
 </body>
 </html>

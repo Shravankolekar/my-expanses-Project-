@@ -25,5 +25,6 @@ urlpatterns = [
     path("login/" , views.login_page , name="login"),
     path("login/add/" , views.addexpancess , name="addexpancess"),
     path("Login/showalldata/" , views.showingalldata , name="showalldata"),
-    path("Login/delete/", views.deletedata, name='deletedata')
+    path("Login/delete/", views.deletedata, name='deletedata'),
+    path("login/dashbord/" , views.dashbord , name="dashbord")
 ]

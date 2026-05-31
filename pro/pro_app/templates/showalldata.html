@@ -1,231 +1,359 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Expense Records</title>
+<style>
 
-    <style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
 
-        *{
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, Helvetica, sans-serif;
-        }
+body{
+    min-height:100vh;
+    background:linear-gradient(135deg,#667eea,#764ba2);
+    padding:20px;
+    padding-top:100px;
+}
 
-        body{
-            min-height: 100vh;
-            background: linear-gradient(135deg,#667eea,#764ba2);
-            padding: 20px;
-        }
+/* =====================
+   NAVBAR
+===================== */
 
-        h1{
-            text-align: center;
-            color: white;
-            margin-bottom: 20px;
-            font-size: 32px;
-        }
+.navbar{
+    position:fixed;
+    top:0;
+    left:0;
 
-        /* Total Expense Card */
+    width:100%;
 
-        .total-card{
-            max-width: 350px;
-            margin: 0 auto 25px auto;
-            background: white;
-            padding: 20px;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: 0px 5px 15px rgba(0,0,0,0.2);
-        }
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 
-        .total-card h3{
-            color: #555;
-            margin-bottom: 10px;
-        }
+    padding:15px 40px;
 
-        .total-card h2{
-            color: green;
-            font-size: 32px;
-        }
+    background:rgba(0,0,0,0.6);
+    backdrop-filter:blur(10px);
 
-        .table-container{
-            width: 100%;
-        }
+    z-index:1000;
+}
 
-        table{
-            width: 100%;
-            border-collapse: collapse;
-            background: rgba(255,255,255,0.95);
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: 0px 8px 25px rgba(0,0,0,0.2);
-        }
+.logo{
+    color:white;
+    font-size:24px;
+    font-weight:bold;
+}
 
-        thead{
-            background: #4f46e5;
-            color: white;
-        }
+.nav-links{
+    display:flex;
+    gap:10px;
+}
 
-        th{
-            padding: 18px;
-            text-align: center;
-            font-size: 16px;
-        }
+.logout-btn{
+    text-decoration:none;
+    color:white;
 
-        td{
-            padding: 15px;
-            text-align: center;
-            border-bottom: 1px solid #eee;
-            font-size: 15px;
-        }
+    padding:10px 18px;
 
-        tbody tr:hover{
-            background: #f5f7ff;
-            transition: 0.3s;
-        }
+    border-radius:10px;
 
-        td:last-child{
-            color: green;
-            font-weight: bold;
-        }
+    background:linear-gradient(135deg,#ff416c,#ff4b2b);
 
-        /* Mobile Responsive */
+    transition:0.3s;
+}
 
-        @media(max-width:768px){
+.logout-btn:hover{
+    transform:translateY(-2px);
+}
 
-            body{
-                padding: 12px;
-            }
+/* =====================
+   TITLE
+===================== */
 
-            h1{
-                font-size: 24px;
-            }
+h1{
+    text-align:center;
+    color:white;
+    margin-bottom:20px;
+    font-size:32px;
+}
 
-            .total-card{
-                max-width: 100%;
-            }
+/* =====================
+   TOTAL CARD
+===================== */
 
-            table,
-            thead,
-            tbody,
-            th,
-            td,
-            tr{
-                display: block;
-            }
+.total-card{
+    max-width:350px;
+    margin:0 auto 25px auto;
 
-            thead{
-                display: none;
-            }
+    background:white;
+    padding:20px;
 
-            tr{
-                background: white;
-                margin-bottom: 15px;
-                border-radius: 12px;
-                padding: 15px;
-                box-shadow: 0px 3px 10px rgba(0,0,0,0.15);
-            }
+    border-radius:15px;
 
-            td{
-                text-align: right;
-                position: relative;
-                border: none;
-                padding: 10px;
-                padding-left: 45%;
-                word-break: break-word;
-            }
+    text-align:center;
 
-            td::before{
-                position: absolute;
-                left: 10px;
-                font-weight: bold;
-                color: #4f46e5;
-            }
+    box-shadow:0px 5px 15px rgba(0,0,0,0.2);
+}
 
-            td:nth-child(1)::before{
-                content: "ID";
-            }
+.total-card h3{
+    color:#555;
+    margin-bottom:10px;
+}
 
-            td:nth-child(2)::before{
-                content: "Category";
-            }
+.total-card h2{
+    color:green;
+    font-size:32px;
+}
 
-            td:nth-child(3)::before{
-                content: "Note";
-            }
+/* =====================
+   TABLE
+===================== */
 
-            td:nth-child(4)::before{
-                content: "Expense Date";
-            }
+.table-container{
+    width:100%;
+    overflow-x:auto;
+}
 
-            td:nth-child(5)::before{
-                content: "Payment Method";
-            }
+table{
+    width:100%;
+    border-collapse:collapse;
 
-            td:nth-child(6)::before{
-                content: "Amount";
-            }
+    background:rgba(255,255,255,0.95);
 
-        }
+    border-radius:15px;
+    overflow:hidden;
 
-    </style>
+    box-shadow:0px 8px 25px rgba(0,0,0,0.2);
+}
 
-</head>
+thead{
+    background:#4f46e5;
+    color:white;
+}
+
+th{
+    padding:18px;
+    text-align:center;
+}
+
+td{
+    padding:15px;
+    text-align:center;
+    border-bottom:1px solid #eee;
+}
+
+tbody tr:hover{
+    background:#f5f7ff;
+}
+
+td:last-child{
+    color:green;
+    font-weight:bold;
+}
+
+/* =====================
+   TABLET
+===================== */
+
+@media(max-width:768px){
+
+    body{
+        padding-top:170px;
+    }
+
+    .navbar{
+        flex-direction:column;
+        gap:15px;
+        padding:15px;
+    }
+
+    .logo{
+        font-size:20px;
+        text-align:center;
+    }
+
+    .nav-links{
+        width:100%;
+        justify-content:center;
+        flex-wrap:wrap;
+    }
+
+    .logout-btn{
+        flex:1;
+        text-align:center;
+    }
+
+    h1{
+        font-size:26px;
+    }
+
+    .total-card{
+        max-width:100%;
+    }
+
+    table,
+    thead,
+    tbody,
+    th,
+    td,
+    tr{
+        display:block;
+    }
+
+    thead{
+        display:none;
+    }
+
+    tr{
+        background:white;
+        margin-bottom:15px;
+        border-radius:12px;
+        padding:15px;
+        box-shadow:0px 3px 10px rgba(0,0,0,0.15);
+    }
+
+    td{
+        text-align:right;
+        position:relative;
+
+        border:none;
+
+        padding:10px;
+        padding-left:45%;
+
+        word-break:break-word;
+    }
+
+    td::before{
+        position:absolute;
+        left:10px;
+        font-weight:bold;
+        color:#4f46e5;
+    }
+
+    td:nth-child(1)::before{content:"ID";}
+    td:nth-child(2)::before{content:"Category";}
+    td:nth-child(3)::before{content:"Note";}
+    td:nth-child(4)::before{content:"Expense Date";}
+    td:nth-child(5)::before{content:"Payment";}
+    td:nth-child(6)::before{content:"Amount";}
+}
+
+/* =====================
+   MOBILE
+===================== */
+
+@media(max-width:480px){
+
+    body{
+        padding-top:190px;
+    }
+
+    .logo{
+        font-size:18px;
+    }
+
+    .nav-links{
+        flex-direction:column;
+        width:100%;
+    }
+
+    .logout-btn{
+        width:100%;
+    }
+
+    h1{
+        font-size:22px;
+    }
+
+    .total-card h2{
+        font-size:26px;
+    }
+
+    td{
+        font-size:14px;
+        padding-left:50%;
+    }
+}
+
+</style>
+
 <body>
 
-    <h1>Expense Records</h1>
+<div class="navbar">
 
-    <!-- Total Expense Card -->
+```
+<div class="logo">
+    Expense Tracker Show All Data
+</div>
 
-    <div class="total-card">
-        <h3>Total Expense</h3>
-        <h2>₹ {{ total_expense }}</h2>
-    </div>
+<div class="nav-links">
 
-    <div class="table-container">
+    <a href="{% url 'dashbord' %}" class="logout-btn">
+        Dashboard
+    </a>
 
-        <table>
+    <a href="{% url 'addexpancess' %}" class="logout-btn">
+        Add Expense
+    </a>
 
-            <thead>
-                <tr>
-                    <th>Sr No</th>
-                    <th>Category Name</th>
-                    <th>Note</th>
-                    <th>Expense Date</th>
-                    <th>Payment Method</th>
-                    <th>Amount</th>
-                </tr>
-            </thead>
+    <a href="{% url 'login' %}" class="logout-btn">
+        Logout
+    </a>
 
-            <tbody>
+</div>
+```
 
-                {% for d in data %}
+</div>
 
-                <tr>
-                    <td>{{ d.id }}</td>
-                    <td>{{ d.category }}</td>
-                    <td>{{ d.note }}</td>
-                    <td>{{ d.expense_date }}</td>
-                    <td>{{ d.payment_method }}</td>
-                    <td>₹ {{ d.amount }}</td>
-                </tr>
+<h1>Expense Records</h1>
 
-                {% empty %}
+<div class="total-card">
+    <h3>Total Expense</h3>
+    <h2>₹ {{ total_expense }}</h2>
+</div>
 
-                <tr>
-                    <td colspan="6" style="text-align:center; color:red;">
-                        No Expense Records Found
-                    </td>
-                </tr>
+<div class="table-container">
 
-                {% endfor %}
+<table>
 
-            </tbody>
+<thead>
+<tr>
+    <th>Sr No</th>
+    <th>Category Name</th>
+    <th>Note</th>
+    <th>Expense Date</th>
+    <th>Payment Method</th>
+    <th>Amount</th>
+</tr>
+</thead>
 
-        </table>
+<tbody>
 
-    </div>
+{% for d in data %}
+
+<tr>
+    <td>{{ d.id }}</td>
+    <td>{{ d.category }}</td>
+    <td>{{ d.note }}</td>
+    <td>{{ d.expense_date }}</td>
+    <td>{{ d.payment_method }}</td>
+    <td>₹ {{ d.amount }}</td>
+</tr>
+
+{% empty %}
+
+<tr>
+    <td colspan="6" style="text-align:center;color:red;">
+        No Expense Records Found
+    </td>
+</tr>
+
+{% endfor %}
+
+</tbody>
+
+</table>
+
+</div>
 
 </body>
-</html>

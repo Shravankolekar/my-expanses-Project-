@@ -1,202 +1,329 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Delete Expense</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Delete Expense</title>
 
-    <style>
+<style>
 
-        *{
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: Arial, Helvetica, sans-serif;
-        }
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
+}
 
-        body{
-            width: 100%;
-            min-height: 100vh;
+body{
+    width:100%;
+    min-height:100vh;
 
-            display: flex;
-            justify-content: center;
-            align-items: center;
+    display:flex;
+    justify-content:center;
+    align-items:center;
 
-            /* Background Image */
-            background-image: url('https://images.unsplash.com/photo-1554224155-6726b3ff858f');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
+    background-image:url('https://images.unsplash.com/photo-1554224155-6726b3ff858f');
+    background-size:cover;
+    background-position:center;
+    background-repeat:no-repeat;
 
-            padding: 15px;
-        }
+    padding:20px;
+    padding-top:100px;
+}
 
-        .delete-container{
+/* =======================
+   NAVBAR
+======================= */
 
-            width: 100%;
-            max-width: 420px;
+.navbar{
+    position:fixed;
+    top:0;
+    left:0;
 
-            background: rgba(255,255,255,0.08);
-            backdrop-filter: blur(12px);
+    width:100%;
 
-            padding: 30px 25px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
 
-            border-radius: 20px;
+    padding:15px 40px;
 
-            box-shadow: 0px 5px 25px rgba(0,0,0,0.3);
+    background:rgba(0,0,0,0.6);
+    backdrop-filter:blur(10px);
 
-        }
+    z-index:1000;
+}
 
-        .delete-container h1{
-            text-align: center;
-            color: white;
-            margin-bottom: 25px;
-            font-size: 28px;
-        }
+.logo{
+    color:white;
+    font-size:24px;
+    font-weight:bold;
+}
 
-        form{
-            display: flex;
-            flex-direction: column;
-        }
+.nav-links{
+    display:flex;
+    gap:10px;
+}
 
-        label{
-            color: white;
-            font-weight: bold;
-            margin-bottom: 8px;
-        }
+.logout-btn{
+    text-decoration:none;
+    color:white;
 
-        input{
+    padding:10px 18px;
 
-            width: 100%;
-            padding: 14px;
+    border-radius:10px;
 
-            border: 1px solid rgba(255,255,255,0.4);
-            border-radius: 12px;
+    background:linear-gradient(135deg,#ff416c,#ff4b2b);
 
-            background: transparent;
-            color: white;
+    transition:0.3s;
+}
 
-            outline: none;
+.logout-btn:hover{
+    transform:translateY(-2px);
+}
 
-            margin-bottom: 20px;
+/* =======================
+   DELETE CARD
+======================= */
 
-            font-size: 15px;
-        }
+.delete-container{
 
-        input::placeholder{
-            color: #e0e0e0;
-        }
+    width:100%;
+    max-width:450px;
 
-        input:focus{
-            border-color: #4facfe;
-            box-shadow: 0px 0px 8px rgba(79,172,254,0.5);
-        }
+    background:rgba(255,255,255,0.08);
+    backdrop-filter:blur(12px);
 
-        button{
+    padding:30px;
 
-            width: 100%;
-            padding: 14px;
+    border-radius:20px;
 
-            border: none;
-            border-radius: 12px;
+    box-shadow:0 5px 25px rgba(0,0,0,0.3);
+}
 
-            background: linear-gradient(135deg,#ff416c,#ff4b2b);
+.delete-container h1{
+    text-align:center;
+    color:white;
+    margin-bottom:25px;
+    font-size:30px;
+}
 
-            color: white;
+form{
+    display:flex;
+    flex-direction:column;
+}
 
-            font-size: 16px;
-            font-weight: bold;
+label{
+    color:white;
+    margin-bottom:8px;
+    font-weight:bold;
+}
 
-            cursor: pointer;
+input{
+    width:100%;
+    padding:14px;
 
-            transition: 0.3s;
-        }
+    border:1px solid rgba(255,255,255,0.4);
+    border-radius:12px;
 
-        button:hover{
-            transform: scale(1.02);
-            opacity: 0.9;
-        }
+    background:transparent;
+    color:white;
 
-        .error{
-            text-align: center;
-            color: #ff0400;
-            margin-top: 15px;
-            font-size: 15px;
-        }
+    outline:none;
 
+    margin-bottom:20px;
+}
 
-        .msg{
-            text-align: center;
-            color: #00ff40;
-            margin-top: 15px;
-            font-size: 15px;
-        }
+input::placeholder{
+    color:#ddd;
+}
 
-        /* Mobile Responsive */
+input:focus{
+    border-color:#4facfe;
+    box-shadow:0 0 8px rgba(79,172,254,0.5);
+}
 
-        @media(max-width:480px){
+button{
+    width:100%;
 
-            .delete-container{
-                padding: 25px 18px;
-            }
+    padding:14px;
 
-            .delete-container h1{
-                font-size: 24px;
-            }
+    border:none;
+    border-radius:12px;
 
-            input{
-                padding: 12px;
-                font-size: 14px;
-            }
+    background:linear-gradient(135deg,#ff416c,#ff4b2b);
 
-            button{
-                padding: 12px;
-                font-size: 15px;
-            }
+    color:white;
 
-        }
+    font-size:16px;
+    font-weight:bold;
 
-    </style>
+    cursor:pointer;
+
+    transition:0.3s;
+}
+
+button:hover{
+    transform:scale(1.02);
+}
+
+.error{
+    text-align:center;
+    color:#ff0000;
+    margin-top:15px;
+}
+
+.msg{
+    text-align:center;
+    color:#00ff44;
+    margin-top:15px;
+}
+
+/* =======================
+   TABLET
+======================= */
+
+@media(max-width:768px){
+
+    body{
+        padding-top:160px;
+    }
+
+    .navbar{
+        flex-direction:column;
+        gap:15px;
+        padding:15px;
+    }
+
+    .logo{
+        font-size:20px;
+        text-align:center;
+    }
+
+    .nav-links{
+        width:100%;
+        justify-content:center;
+        flex-wrap:wrap;
+    }
+
+    .logout-btn{
+        flex:1;
+        text-align:center;
+    }
+}
+
+/* =======================
+   MOBILE
+======================= */
+
+@media(max-width:480px){
+
+    body{
+        padding-top:180px;
+    }
+
+    .delete-container{
+        padding:25px 18px;
+    }
+
+    .delete-container h1{
+        font-size:24px;
+    }
+
+    input{
+        padding:12px;
+        font-size:14px;
+    }
+
+    button{
+        padding:12px;
+        font-size:14px;
+    }
+
+    .logo{
+        font-size:18px;
+    }
+
+    .nav-links{
+        flex-direction:column;
+        width:100%;
+    }
+
+    .logout-btn{
+        width:100%;
+    }
+}
+
+</style>
 
 </head>
+
 <body>
 
-    <div class="delete-container">
+<!-- Navbar -->
 
-        <h1>Delete Expense</h1>
+<div class="navbar">
 
-        <form action="" method="POST">
+    <div class="logo">
+        Expense Tracker Delete Data
+    </div>
 
-            {% csrf_token %}
+    <div class="nav-links">
 
-            <label>Sr No</label>
+        <a href="{% url 'dashbord' %}" class="logout-btn">
+            Dashboard
+        </a>
 
-            <input
-                type="number"
-                name="id"
-                placeholder="Enter Expense ID to Delete"
-                required
-            >
+        <a href="{% url 'showalldata' %}" class="logout-btn">
+            Show Data
+        </a>
 
-            <button type="submit">
-                Delete Expense
-            </button>
-
-            {% if error %}
-                <p class="error">
-                    <b>{{ error }}</b>
-                </p>
-            {% endif %}
-
-            {% if mag %}
-                <p class="msg">
-                    <b>{{ mag }}</b>
-                </p>
-            {% endif %}
-
-        </form>
+        <a href="{% url 'login' %}" class="logout-btn">
+            Logout
+        </a>
 
     </div>
+
+</div>
+
+<!-- Delete Form -->
+
+<div class="delete-container">
+
+    <h1>Delete Expense</h1>
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <label>Expense ID</label>
+
+        <input
+            type="number"
+            name="id"
+            placeholder="Enter Expense ID"
+            required
+        >
+
+        <button type="submit">
+            Delete Expense
+        </button>
+
+        {% if error %}
+            <p class="error">
+                <b>{{ error }}</b>
+            </p>
+        {% endif %}
+
+        {% if mag %}
+            <p class="msg">
+                <b>{{ mag }}</b>
+            </p>
+        {% endif %}
+
+    </form>
+
+</div>
 
 </body>
 </html>
