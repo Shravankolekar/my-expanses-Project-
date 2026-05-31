@@ -1,3 +1,5 @@
+import re
+
 from django.shortcuts import render , redirect
 from .models import user_login , expancess
 
@@ -54,3 +56,7 @@ def addexpancess(request):
             error = "Enter a Currect Information"
     
     return render(request , "addexpances.html" , {"error" : error} )
+
+def showingalldata(request):
+    data = expancess.objects.all()
+    return render(request , "showalldata.html" , {"data" : data})
